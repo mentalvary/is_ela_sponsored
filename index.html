@@ -153,7 +153,7 @@
             });
 
             const urlParams = new URLSearchParams(window.location.search);
-            const pretypedBrand = urlParams.get('brand');
+            const pretypedBrand = urlParams.get('by');
             if (pretypedBrand) {
                 input.value = pretypedBrand;
                 handleCheck(true);
@@ -171,7 +171,7 @@
 
             if (!fromLoad) {
                 const url = new URL(window.location.href);
-                url.searchParams.set('brand', query);
+                url.searchParams.set('by', query);
                 window.history.pushState(null, '', url.toString());
             }
 
