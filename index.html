@@ -91,10 +91,11 @@
             ['Herman Miller Chair', 'herman', 'chair.png', 'behind'],
             ['DJI Osmo Camera', 'osmo', 'camera.png'],
             ['Sennheiser Open Back Headphones', 'sennheiser', 'headphones.png'],
+            ['LA Wig Company', 'wig', 'wig.png'],
         ]
         function handleLoad() {
             const input = document.getElementById('query');
-            new Awesomplete(input, {
+            const aw = new Awesomplete(input, {
                 list: ADS.map(e => e[0])
             });
 
@@ -106,6 +107,7 @@
                 adItem.setAttribute('id', id);
                 adItem.setAttribute('src', src);
                 adItem.classList.add('image');
+                adItem.classList.add('ad-item');
                 if (behind) {
                     gulag.prepend(adItem);
                 }
@@ -135,7 +137,10 @@
                 resultEle.classList.remove('yes');
                 resultEle.classList.add('no');
             }
+        }
 
+        function handleShowAll() {
+            document.querySelectorAll('.ad-item').forEach(e => e.classList.add('highlight'));
         }
 
         function checkForShilling(query) {
@@ -152,13 +157,14 @@
     <div id="main">
         <h1>Is Ela sponsored?</h1>
         <div id="elas-gulag">
-            <img class="image" src="ela_ad.png"></img>
+            <img class="image" src="ela_ad.png">
         </div>
         <div id="controls">
             <h2>Check if Ela is sponsored by?</h2>
             <input id="query" autocomplete="off" class="awesomplete" list="mylist" data-minchars="0"
                 data-maxitems="3" />
             <input type="button" value="Check" onclick="handleCheck()" />
+            <input type="button" value="Highlight all" onclick="handleShowAll()" />
             <div id="result"></div>
         </div>
     </div>
