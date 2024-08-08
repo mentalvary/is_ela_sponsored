@@ -108,6 +108,14 @@
 
         footer {
             color: gray;
+            position: relative;
+        }
+
+        #sig {
+            position: absolute;
+            right: 0;
+            margin-right: 1em;
+            font-style: italic;
         }
     </style>
     <script type="text/javascript">
@@ -116,8 +124,8 @@
             ['GARMIN Watch', 'garmin', 'watch.png'],
             ['Herman Miller Chair', 'herman', 'chair.png', 'behind'],
             ['Deathbound', 'deathbound', 'deathbound.png'],
-            ['DJI Osmo Camera', 'osmo', 'camera.png'],
-            ['Sennheiser Open Back Headphones', 'sennheiser', 'headphones.png'],
+            ['DJI Osmo Action Camera', 'osmo', 'camera.png'],
+            ['Sennheiser HD 650 Open Back Headphones', 'sennheiser', 'headphones.png'],
             ['LA Wig Company', 'wig', 'wig.png'],
         ]
         function handleLoad() {
@@ -156,6 +164,10 @@
             const match = checkForShilling(query);
             const resultEle = document.getElementById('result');
 
+            if (!query) {
+                return;
+            }
+
             if (!fromLoad) {
                 const url = new URL(window.location.href);
                 url.searchParams.set('brand', query);
@@ -183,9 +195,6 @@
         }
 
         function checkForShilling(query) {
-            if (query.length < 3) {
-                return null;
-            }
             const match = ADS.find(e => e[0].toLowerCase().includes(query));
             return match;
         }
@@ -205,8 +214,11 @@
             <input type="button" value="Check" onclick="handleCheck()" />
             <input type="button" value="Highlight all" onclick="handleShowAll()" />
             <div id="result">&nbsp;</div>
-            <footer>Any #ads missing? Mention them in the Discord <a
-                    href="https://discord.com/channels/128836859735441408/1155972801317064704">Meme Chat</a> thread
+            <footer>
+                <span>Any #ads missing? Mention them in the Discord <a
+                        href="https://discord.com/channels/128836859735441408/1155972801317064704">Meme Chat</a>
+                    thread</span>
+                <span id="sig">mentalvary</span>
             </footer>
         </div>
     </div>
