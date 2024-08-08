@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.7/awesomplete.base.min.css"
+        integrity="sha512-NozyuE047CUbwhtOgj/mo3K0NFmVSrHNVm9l1/1qUMc2CuU2na8cWYPk/ksYX4tMoRwWJ+bLFKsdO8OHM3X+yA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.7/awesomplete.min.js"
+        integrity="sha512-Pc3/aEr2FIVZhHxe0RAC9SFrd+pxBJHN3pNJfJNTKc2XAFnXUjgQGIh6X935ePSXNMN6rFa3yftxSnZfJE8ZAg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Is Ela Sponsored?</title>
+    <style>
+        html,
+        body {
+            background-color: #121212;
+            height: 100%;
+            padding: 0px;
+            margin: 0px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 0px;
+            height: 5%;
+            color: #eeeeee;
+        }
+
+        h2 {
+            margin: 0px;
+            color: #eeeeee;
+        }
+
+        #main {
+            height: 100%;
+        }
+
+        #elas-gulag {
+            height: 80%;
+            position: relative;
+        }
+
+        .image {
+            position: absolute;
+            left: 50%;
+            height: 100%;
+            transform: translateX(-50%);
+        }
+
+        .highlight {
+            -webkit-filter: drop-shadow(3px 0 0px yellow) drop-shadow(0 3px 0 yellow) drop-shadow(-3px 0 0px yellow) drop-shadow(0 -3px 0 yellow);
+            filter: drop-shadow(3px 0 0px yellow) drop-shadow(0 3px 0 yellow) drop-shadow(-3px 0 0px yellow) drop-shadow(0 -3px 0 yellow);
+        }
+
+
+        #controls {
+            background-color: #212121;
+            height: 15%;
+            text-align: center;
+            padding-top: 1em;
+        }
+
+        div.awesomplete {
+            display: inline-block;
+            position: relative;
+            vertical-align: middle;
+        }
+
+        input {
+            font-size: 1.25em;
+            vertical-align: middle;
+        }
+
+        #result {
+            font-size: 1.5em;
+        }
+
+        .yes {
+            color: greenyellow;
+        }
+
+        .no {
+            color: red;
+        }
+    </style>
+    <script type="text/javascript">
+        const ADS = [
+            ['Quaker Oats', 'oats', 'oats.png'],
+            ['GARMIN Watch', 'garmin', 'watch.png'],
+            ['Herman Miller Chair', 'herman', 'chair.png', 'behind'],
+            ['DJI Osmo Camera', 'osmo', 'camera.png'],
+            ['Sennheiser Open Back Headphones', 'sennheiser', 'headphones.png'],
+        ]
+        function handleLoad() {
+            const input = document.getElementById('query');
+            new Awesomplete(input, {
+                list: ADS.map(e => e[0])
+            });
+
+            const gulag = document.getElementById('elas-gulag');
+            ADS.forEach(ad => {
+                const [name, id, src] = ad;
+                const behind = ad.length > 3 && ad[3] == 'behind';
+                const adItem = document.createElement('img');
+                adItem.setAttribute('id', id);
+                adItem.setAttribute('src', src);
+                adItem.classList.add('image');
+                if (behind) {
+                    gulag.prepend(adItem);
+                }
+                else {
+                    gulag.appendChild(adItem);
+                }
+
+            });
+        }
+
+        function handleCheck() {
+            const query = document.getElementById('query').value.toLowerCase();
+            const match = checkForShilling(query);
+            const resultEle = document.getElementById('result');
+
+            document.querySelectorAll('.highlight').forEach(e => e.classList.remove('highlight'));
+
+            if (match) {
+                const [matchName, matchId] = match
+                document.getElementById(matchId).classList.add('highlight');
+                resultEle.innerText = `Yes! Ela is shilling for ${matchName}!`;
+                resultEle.classList.remove('no');
+                resultEle.classList.add('yes');
+            }
+            else {
+                resultEle.innerText = `Nope, Ela probably hates this company and is gonna destroy it.`;
+                resultEle.classList.remove('yes');
+                resultEle.classList.add('no');
+            }
+
+        }
+
+        function checkForShilling(query) {
+            if (query.length < 3) {
+                return null;
+            }
+            const match = ADS.find(e => e[0].toLowerCase().includes(query));
+            return match;
+        }
+    </script>
+</head>
+
+<body onload="handleLoad()">
+    <div id="main">
+        <h1>Is Ela sponsored?</h1>
+        <div id="elas-gulag">
+            <img class="image" src="ela_ad.png"></img>
+        </div>
+        <div id="controls">
+            <h2>Check if Ela is sponsored by?</h2>
+            <input id="query" autocomplete="off" class="awesomplete" list="mylist" data-minchars="0"
+                data-maxitems="3" />
+            <input type="button" value="Check" onclick="handleCheck()" />
+            <div id="result"></div>
+        </div>
+    </div>
+</body>
+
+</html>
