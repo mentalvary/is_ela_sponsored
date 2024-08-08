@@ -7,7 +7,7 @@
     <meta property="og:url" content="https://iselasponsored.com/">
     <meta property="og:title" content="Is Ela Sponsored?">
     <meta property="og:description" content="Which brands are unofficially sponsoring myega influencer Ela">
-    <meta property="og:image" content="https://iselasponsored.com/stare.png">    
+    <meta property="og:image" content="https://iselasponsored.com/stare.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.7/awesomplete.base.min.css"
         integrity="sha512-NozyuE047CUbwhtOgj/mo3K0NFmVSrHNVm9l1/1qUMc2CuU2na8cWYPk/ksYX4tMoRwWJ+bLFKsdO8OHM3X+yA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -23,6 +23,22 @@
             padding: 0px;
             margin: 0px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        a:link {
+            color: white;
+        }
+
+        a:visited {
+            color: white;
+        }
+
+        a:hover {
+            color: white;
+        }
+
+        a:active {
+            color: white;
         }
 
         h1 {
@@ -95,7 +111,7 @@
     </style>
     <script type="text/javascript">
         const ADS = [
-            ['Quaker Oats', 'oats', 'oats.png'],
+            ['AXA Oats', 'oats', 'oats.png'],
             ['GARMIN Watch', 'garmin', 'watch.png'],
             ['Herman Miller Chair', 'herman', 'chair.png', 'behind'],
             ['DJI Osmo Camera', 'osmo', 'camera.png'],
@@ -169,13 +185,15 @@
             <img class="image" src="ela_ad.png">
         </div>
         <div id="controls">
-            <h2>Check if Ela is sponsored by?</h2>
+            <h2>Is Ela sponsored by...</h2>
             <input id="query" autocomplete="off" class="awesomplete" list="mylist" data-minchars="0"
                 data-maxitems="3" />
             <input type="button" value="Check" onclick="handleCheck()" />
             <input type="button" value="Highlight all" onclick="handleShowAll()" />
             <div id="result">&nbsp;</div>
-            <footer>Any #ads missing? Mention them in the Discord <a href="https://discord.com/channels/128836859735441408/1155972801317064704">Meme Chat</a> channel </footer>
+            <footer>Any #ads missing? Mention them in the Discord <a
+                    href="https://discord.com/channels/128836859735441408/1155972801317064704">Meme Chat</a> channel
+            </footer>
         </div>
     </div>
 </body>
