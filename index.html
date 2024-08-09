@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://iselasponsored.com/stare.png">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">    
+    <meta http-equiv="Expires" content="0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.7/awesomplete.base.min.css"
         integrity="sha512-NozyuE047CUbwhtOgj/mo3K0NFmVSrHNVm9l1/1qUMc2CuU2na8cWYPk/ksYX4tMoRwWJ+bLFKsdO8OHM3X+yA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -123,19 +123,20 @@
     </style>
     <script type="text/javascript">
         const ADS = [
-            { name:'AXA Oats', id: 'oats', src: 'oats.png'},
-            { name:'GARMIN Watch', id: 'garmin', src: 'watch.png'},
-            { name:'Herman Miller Chair', id: 'herman', src: 'chair.png', behind: true},
-            { name:'Deathbound', id: 'deathbound', src: 'deathbound.png'},
-            { name:'DJI Osmo Action Camera', id: 'osmo', src: 'camera.png'},
-            { name:'Sennheiser HD 650 Open Back Headphones', id: 'sennheiser', src: 'headphones.png'},
-            { name:'LA Wig Company', id: 'wig', src: 'wig.png'},
-            { name:'Apple', id: 'apple', src: 'apple.png'},
-            { name:'Shure SM7B Microphone', id: 'mic', src: 'mic.png', behind: true, specialHTML: match => `Yes! Ela is shilling for ${match.name}! Great taste <img src="elaMic.gif" width="28" height="28">`},
-            { name:'Mikkaa', specialText: match => `Yes! Ela is simping for ${match.name}!`},
-            { name:'Sweden', specialText: match => 'Ja! Sverige nu jävlar!'},
-            { name:'Cock', specialHTML: match => 'YEP! Ela loves COCK <img src="elaMic.gif" width="28" height="28">'},
-            { name:'Water', specialHTML: match => '<img src="SoyHowl.gif" width="40" height="40">'},
+            { name: 'AXA Oats', id: 'oats', src: 'oats.png' },
+            { name: 'GARMIN Watch', id: 'garmin', src: 'watch.png' },
+            { name: 'Herman Miller Chair', id: 'herman', src: 'chair.png', behind: true },
+            { name: 'Deathbound', id: 'deathbound', src: 'deathbound.png' },
+            { name: 'Salomon S/Lab Ultra 10 Unisex Running Vest', id: 'vest', src: 'vest.png' },
+            { name: 'DJI Osmo Action Camera', id: 'osmo', src: 'camera.png' },
+            { name: 'Sennheiser HD 650 Open Back Headphones', id: 'sennheiser', src: 'headphones.png' },
+            { name: 'LA Wig Company', id: 'wig', src: 'wig.png' },
+            { name: 'Apple', id: 'apple', src: 'apple.png' },
+            { name: 'Shure SM7B Microphone', id: 'mic', src: 'mic.png', behind: true, specialHTML: match => `Yes! Ela is shilling for ${match.name}! Great taste <img src="elaMic.gif" width="28" height="28">` },
+            { name: 'Mikkaa', specialText: match => `Yes! Ela is simping for ${match.name}!` },
+            { name: 'Sweden', specialText: match => 'Ja! Sverige nu jävlar!' },
+            { name: 'Cock', specialHTML: match => 'YEP! Ela loves COCK <img src="elaMic.gif" width="28" height="28">' },
+            { name: 'Water', specialHTML: match => '<img src="SoyHowl.gif" width="40" height="40">' },
         ]
         function handleLoad() {
             const input = document.getElementById('query');
@@ -199,7 +200,7 @@
                 resultEle.classList.add('yes');
                 if (match.id) {
                     document.getElementById(match.id).classList.add('highlight');
-                }                
+                }
             }
             else {
                 resultEle.innerText = `Nope, Ela probably hates ${query} and is gonna flush it 🚽`;
