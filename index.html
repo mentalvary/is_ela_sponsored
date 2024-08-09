@@ -9,6 +9,9 @@
     <meta property="og:title" content="Is Ela Sponsored?">
     <meta property="og:description" content="Which brands are unofficially sponsoring myega influencer Ela">
     <meta property="og:image" content="https://iselasponsored.com/stare.png">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.7/awesomplete.base.min.css"
         integrity="sha512-NozyuE047CUbwhtOgj/mo3K0NFmVSrHNVm9l1/1qUMc2CuU2na8cWYPk/ksYX4tMoRwWJ+bLFKsdO8OHM3X+yA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -128,6 +131,7 @@
             ['Sennheiser HD 650 Open Back Headphones', 'sennheiser', 'headphones.png'],
             ['LA Wig Company', 'wig', 'wig.png'],
             ['Apple', 'apple', 'apple.png'],
+            ['Mikkaa', 'mikkaa', ''],
         ]
         function handleLoad() {
             const input = document.getElementById('query');
@@ -161,7 +165,7 @@
         }
 
         function handleCheck(fromLoad) {
-            const query = document.getElementById('query').value.toLowerCase();
+            const query = document.getElementById('query').value;
             const match = checkForShilling(query);
             const resultEle = document.getElementById('result');
 
@@ -181,11 +185,14 @@
                 const [matchName, matchId] = match
                 document.getElementById(matchId).classList.add('highlight');
                 resultEle.innerText = `Yes! Ela is shilling for ${matchName}!`;
+                if (matchId === 'mikkaa') {
+                    resultEle.innerText = `Yes! Ela is simping for ${matchName}!`;
+                }
                 resultEle.classList.remove('no');
                 resultEle.classList.add('yes');
             }
             else {
-                resultEle.innerText = `Nope, Ela probably hates this company and is gonna destroy it.`;
+                resultEle.innerText = `Nope, Ela probably hates ${query} and is gonna flush it 🚽`;
                 resultEle.classList.remove('yes');
                 resultEle.classList.add('no');
             }
@@ -196,7 +203,8 @@
         }
 
         function checkForShilling(query) {
-            const match = ADS.find(e => e[0].toLowerCase().includes(query));
+            const queryLower = query.toLowerCase();
+            const match = ADS.find(e => e[0].toLowerCase().includes(queryLower));
             return match;
         }
     </script>
