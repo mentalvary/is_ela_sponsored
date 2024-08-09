@@ -123,32 +123,36 @@
     </style>
     <script type="text/javascript">
         const ADS = [
-            ['AXA Oats', 'oats', 'oats.png'],
-            ['GARMIN Watch', 'garmin', 'watch.png'],
-            ['Herman Miller Chair', 'herman', 'chair.png', 'behind'],
-            ['Deathbound', 'deathbound', 'deathbound.png'],
-            ['DJI Osmo Action Camera', 'osmo', 'camera.png'],
-            ['Sennheiser HD 650 Open Back Headphones', 'sennheiser', 'headphones.png'],
-            ['LA Wig Company', 'wig', 'wig.png'],
-            ['Apple', 'apple', 'apple.png'],
-            ['Mikkaa', 'mikkaa', ''],
+            { name:'AXA Oats', id: 'oats', src: 'oats.png'},
+            { name:'GARMIN Watch', id: 'garmin', src: 'watch.png'},
+            { name:'Herman Miller Chair', id: 'herman', src: 'chair.png', behind: true},
+            { name:'Deathbound', id: 'deathbound', src: 'deathbound.png'},
+            { name:'DJI Osmo Action Camera', id: 'osmo', src: 'camera.png'},
+            { name:'Sennheiser HD 650 Open Back Headphones', id: 'sennheiser', src: 'headphones.png'},
+            { name:'LA Wig Company', id: 'wig', src: 'wig.png'},
+            { name:'Apple', id: 'apple', src: 'apple.png'},
+            { name:'Mikkaa', specialText: match => `Yes! Ela is simping for ${match.name}!`},
+            { name:'Sweden', specialText: match => 'Ja! Sverige nu jävlar!'},
+            { name:'Cock', specialHTML: match => 'YEP! Ela loves COCK <img src="elaMic.gif" width="28" height="28">'},
+            { name:'Water', specialHTML: match => '<img src="SoyHowl.gif" width="40" height="40">'},
         ]
         function handleLoad() {
             const input = document.getElementById('query');
             new Awesomplete(input, {
-                list: ADS.map(e => e[0])
+                list: ADS.map(e => e.name)
             });
 
             const gulag = document.getElementById('elas-gulag');
             ADS.forEach(ad => {
-                const [name, id, src] = ad;
-                const behind = ad.length > 3 && ad[3] == 'behind';
+                if (!ad.id || !ad.src) {
+                    return;
+                }
                 const adItem = document.createElement('img');
-                adItem.setAttribute('id', id);
-                adItem.setAttribute('src', src);
+                adItem.setAttribute('id', ad.id);
+                adItem.setAttribute('src', ad.src);
                 adItem.classList.add('image');
                 adItem.classList.add('ad-item');
-                if (behind) {
+                if (ad.behind) {
                     gulag.prepend(adItem);
                 }
                 else {
@@ -166,9 +170,6 @@
 
         function handleCheck(fromLoad) {
             const query = document.getElementById('query').value;
-            const match = checkForShilling(query);
-            const resultEle = document.getElementById('result');
-
             if (!query) {
                 return;
             }
@@ -179,17 +180,25 @@
                 window.history.pushState(null, '', url.toString());
             }
 
+            const match = checkForShilling(query);
+            const resultEle = document.getElementById('result');
             document.querySelectorAll('.highlight').forEach(e => e.classList.remove('highlight'));
 
             if (match) {
-                const [matchName, matchId] = match
-                document.getElementById(matchId).classList.add('highlight');
-                resultEle.innerText = `Yes! Ela is shilling for ${matchName}!`;
-                if (matchId === 'mikkaa') {
-                    resultEle.innerText = `Yes! Ela is simping for ${matchName}!`;
+                if (match.specialText) {
+                    resultEle.innerText = match.specialText(match);
+                }
+                else if (match.specialHTML) {
+                    resultEle.innerHTML = match.specialHTML(match);
+                }
+                else {
+                    resultEle.innerText = `Yes! Ela is shilling for ${match.name}!`;
                 }
                 resultEle.classList.remove('no');
                 resultEle.classList.add('yes');
+                if (match.id) {
+                    document.getElementById(match.id).classList.add('highlight');
+                }                
             }
             else {
                 resultEle.innerText = `Nope, Ela probably hates ${query} and is gonna flush it 🚽`;
@@ -204,7 +213,7 @@
 
         function checkForShilling(query) {
             const queryLower = query.toLowerCase();
-            const match = ADS.find(e => e[0].toLowerCase().includes(queryLower));
+            const match = ADS.find(e => e.name.toLowerCase().includes(queryLower));
             return match;
         }
     </script>
